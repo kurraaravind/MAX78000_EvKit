@@ -1,0 +1,104 @@
+#include "gpio1.h"
+
+
+void gpio_set(uint8_t port_num, uint8_t pin_num, uint8_t value)
+{
+	
+    mxc_gpio_cfg_t gpio;
+    
+    switch(port_num)
+    {
+	case 0:
+	    gpio.port = MXC_GPIO0;
+	    gpio.mask = 1UL << pin_num;
+	    gpio.pad = MXC_GPIO_PAD_NONE;
+	    gpio.func = MXC_GPIO_FUNC_OUT;
+	    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+	    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+	    break;
+	case 1:
+	    gpio.port = MXC_GPIO1;
+	    gpio.mask = 1UL << pin_num;
+	    gpio.pad = MXC_GPIO_PAD_NONE;
+	    gpio.func = MXC_GPIO_FUNC_OUT;
+	    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+	    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+	    break;
+	case 2:
+	    gpio.port = MXC_GPIO2;
+	    gpio.mask = 1UL << pin_num;
+	    gpio.pad = MXC_GPIO_PAD_NONE;
+	    gpio.func = MXC_GPIO_FUNC_OUT;
+	    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+	    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+	    break;
+	case 3:
+	    gpio.port = MXC_GPIO3;
+	    gpio.mask = 1UL << pin_num;
+	    gpio.pad = MXC_GPIO_PAD_NONE;
+	    gpio.func = MXC_GPIO_FUNC_OUT;
+	    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+	    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+	    break;
+	default:
+	    printf("\nInvalid PORT");
+	    break;
+    }
+    MXC_GPIO_Config(&gpio);
+    if(value == 1)
+    {
+	    MXC_GPIO_OutSet(gpio.port, gpio.mask);
+    }
+    else if (value == 0)
+    {
+	    MXC_GPIO_OutClr(gpio.port, gpio.mask);
+    }
+
+}
+uint32_t gpio_get(uint8_t port_num, uint8_t pin_num)
+{
+	mxc_gpio_cfg_t gpio;
+
+	switch(port_num)
+	{
+		case 0:
+		    gpio.port = MXC_GPIO0;
+		    gpio.mask = 1UL << pin_num;
+		    gpio.pad = MXC_GPIO_PAD_PULL_UP;
+		    gpio.func = MXC_GPIO_FUNC_IN;
+		    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+		    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+		    break;
+		case 1:
+		    gpio.port = MXC_GPIO1;
+		    gpio.mask = 1UL << pin_num;
+		    gpio.pad = MXC_GPIO_PAD_PULL_UP;
+		    gpio.func = MXC_GPIO_FUNC_IN;
+		    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+		    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+		    break;
+		case 2:
+		    gpio.port = MXC_GPIO2;
+		    gpio.mask = 1UL << pin_num;
+		    gpio.pad = MXC_GPIO_PAD_PULL_UP;
+		    gpio.func = MXC_GPIO_FUNC_IN;
+		    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+		    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+		    break;
+		case 3:
+		    gpio.port = MXC_GPIO3;
+		    gpio.mask = 1UL << pin_num;
+		    gpio.pad = MXC_GPIO_PAD_PULL_UP;
+		    gpio.func = MXC_GPIO_FUNC_IN;
+		    gpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+		    gpio.drvstr = MXC_GPIO_DRVSTR_0;
+		    break;
+		default:
+		    printf("\nInvalid PORT");
+		    break;    
+	}
+	MXC_GPIO_Config(&gpio);
+	return (MXC_GPIO_InGet(gpio.port, gpio.mask) >> pin_num);
+
+}
+
