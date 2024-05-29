@@ -136,6 +136,11 @@ export CMSIS_ROOT
 #   	  |- *.h
 #   	|- src
 #   	  |- *.c
+#   |- flash
+#       |- inc
+#         |- *.h
+#       |- src
+#         |- *.c
 
 # Configuration Variables:
 # - VPATH : Tell this Makefile to search additional locations for source (.c) files.
@@ -159,11 +164,13 @@ export CMSIS_ROOT
 # Where to find source files for this project.
 VPATH += .
 VPATH += drivers/gpio/src
+VPATH += drivers/flash/src
 VPATH := $(VPATH)
 
 # Where to find header files for this project
 IPATH += .
 IPATH += drivers/gpio/inc
+IPATH += drivers/flash/inc
 IPATH := $(IPATH)
 
 AUTOSEARCH ?= 1
