@@ -131,12 +131,23 @@ export CMSIS_ROOT
 # ./
 # |- main.c
 # |- drivers (optional)
-#   |- gpio
+#    |- gpio
 #   	|- inc
 #   	  |- *.h
 #   	|- src
 #   	  |- *.c
-#   |- flash
+#    |- flash
+#       |- inc
+#         |- *.h
+#       |- src
+#         |- *.c
+# |- tests
+#    |- gpio
+#   	|- inc
+#   	  |- *.h
+#   	|- src
+#   	  |- *.c
+#    |- flash
 #       |- inc
 #         |- *.h
 #       |- src
@@ -165,12 +176,16 @@ export CMSIS_ROOT
 VPATH += .
 VPATH += drivers/gpio/src
 VPATH += drivers/flash/src
+VPATH += tests/gpio/src
+VPATH += tests/flash/src
 VPATH := $(VPATH)
 
 # Where to find header files for this project
 IPATH += .
 IPATH += drivers/gpio/inc
 IPATH += drivers/flash/inc
+IPATH += tests/gpio/inc
+IPATH += tests/flash/inc
 IPATH := $(IPATH)
 
 AUTOSEARCH ?= 1
