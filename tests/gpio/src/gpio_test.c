@@ -20,7 +20,7 @@
  ******************************************************************************/
 
 /***** Includes *****/
-#include "test_gpio.h"
+#include "gpio_test.h"
 #include "gpio1.h"
 
 
@@ -108,9 +108,9 @@ void test_gpio(void)
 	int a = test_gpio_set();
 	int b = test_gpio_get();
 	int c = test_gpio_toggle();
-	if(a == PASS && b == PASS && C == PASS)
+	if(a == PASS && b == PASS && c == PASS)
 	{
-		printf("Test cases of GPIO PASSED!\n");
+		printf("All Test cases of GPIO PASSED!\n");
 	}
 	else
 	{
