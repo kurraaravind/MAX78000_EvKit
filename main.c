@@ -1,7 +1,7 @@
 /**
  * @file        main.c
- * @brief       GPIO Example
- * @details	Toggling the LED's on P0.2 and P0.3 GPIO pins 
+ * @brief       Testing the drivers Example
+ * @details	Testing the drivers by calling test functions
  */
 
 /******************************************************************************
@@ -29,18 +29,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
-#include "gpio1.h"
+#include "gpio_test.h"
+#include "flash_test.h"
 
 int main(void)
 {
-	while(1)	// Infinite loop to continuously toggle the GPIO pins
-	{
-		gpio_set(0,2,1);	// Setting P0.2(Port0 Pin2) to High
-		gpio_set(0,3,1);	// setting P0.3(Port0 Pin3) to High
-        	MXC_Delay(1000000);	// Delay of 1000000 microSeconds/1 second
-		gpio_set(0,2,0);	// Setting P0.2(Port0 Pin2) to Low
-		gpio_set(0,3,0);	// Setting P0.3(Port0 Pin3) to Low
-        	MXC_Delay(1000000);	// Delay of 1000000 microSeconds/1 second
-	}
-    return 0;
+	test_gpio();	//Function to test GPIO drivers
+	test_flash();	//Function to test Flash drivers
+	return 0;
 }
