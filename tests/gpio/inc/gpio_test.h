@@ -33,7 +33,7 @@
 /***** Includes *****/
 #include "gpio1.h"
 
-/***** Definitions *****/_
+/***** Definitions *****/
 #define PORT 0	//GPIO PORT 0
 #define PIN2 2	//GPIO PIN 2 
 #define PIN3 3	//GPIO PIN 3
