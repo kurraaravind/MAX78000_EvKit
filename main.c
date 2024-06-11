@@ -31,10 +31,12 @@
 #include <stdint.h>
 #include "gpio_test.h"
 #include "flash_test.h"
+#include "i2c_test.h"
 
 int main(void)
 {
 	test_gpio();	//Function to test GPIO drivers
 	test_flash();	//Function to test Flash drivers
+	test_i2c();    //Function to test I2c drivers
 	return 0;
 }
