@@ -59,7 +59,6 @@ extern "C" {
 
 #define I2C_FREQ 100000       // I2C frequency set to 100kHz
 #define device    0x69
-#define reg_addr  0x40
 
 
 /***** Function Prototypes *****/
