@@ -49,6 +49,7 @@ int test_i2c_scan(void)
 /******************************************************************************/
 int test_i2c_write(void)
 {
+    uint8_t reg_addr = 0x40; 
     uint8_t data = 0xFF; // Declare and initialize the data variable
     if(i2c_write_register(device, reg_addr, &data, 1) == 0){
         return 0;
@@ -61,8 +62,14 @@ int test_i2c_write(void)
 int test_i2c_read(void)
 {
 	uint8_t read_buff;
+	uint8_t reg_addr = 0x00; 
     if(i2c_read_register(device, reg_addr, &read_buff, 1) == 0){
-		return 0;
+	    	if(read_buff == "D1"){
+			return 0;
+		}
+	    	else{
+			return 1;
+		}
 	}
 	else{
 		return 1;
