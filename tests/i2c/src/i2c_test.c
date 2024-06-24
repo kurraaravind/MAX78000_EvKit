@@ -59,21 +59,25 @@ int test_i2c_write(void)
     }
 }
 /******************************************************************************/
-int test_i2c_read(void)
-{
-	uint8_t read_buff;
-	uint8_t reg_addr = 0x00; 
-    if(i2c_read_register(device, reg_addr, &read_buff, 1) == 0){
-	    	if(read_buff == "D1"){
-			return 0;
-		}
-	    	else{
-			return 1;
-		}
-	}
-	else{
-		return 1;
-	}
+int test_i2c_read(void) {
+    uint8_t read_buff;
+    uint8_t reg_addr = 0x00;
+    uint8_t expected_value = 0xD1;
+
+    int result = i2c_read_register(device, reg_addr, &read_buff, 1);
+    if (result == E_NO_ERROR) {
+        // Compare the read value with the expected value
+        if (read_buff == expected_value) {
+            printf("Test passed: Read value 0x%02X matches expected value 0x%02X\n", read_buff, expected_value);
+            return 0; // Test passed
+        } else {
+            printf("Test failed: Read value 0x%02X does not match expected value 0x%02X\n", read_buff, expected_value);
+            return 1; // Test failed
+        }
+    } else {
+        printf("I2C read failed with error code: %d\n", result);
+        return 1; // Test failed due to I2C error
+    }
 }
 /******************************************************************************/
 void test_i2c(void)
