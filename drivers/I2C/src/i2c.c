@@ -11,7 +11,7 @@ void i2c_init(void) {
 }
 
 // Scan for I2C slave devices on the bus
-void i2c_scan(void) {
+int i2c_scan(void) {
     printf("-->Scanning started\n");
     MXC_I2C_SetFrequency(I2C_MASTER, I2C_FREQ);      // Set the I2C frequency
     mxc_i2c_req_t reqMaster;                         // Create an I2C request structure for the scan
