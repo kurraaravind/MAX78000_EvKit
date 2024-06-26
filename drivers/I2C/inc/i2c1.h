@@ -63,12 +63,12 @@ extern "C" {
  * @brief      Initializes the I2C master interface
  *             Prints error message if initialization fails.
 */
-void i2c_init(void);
+int i2c_init(void);
 /**
  * @brief      Scan for I2C slave devices on the bus.
  *             Setup the I2C frequency.
 */
-void i2c_scan(void);
+int i2c_scan(void);
 /**
  * @brief      Writes data to a specific register of an I2C slave device.
  * @param      address	     Address of the slave device.
