@@ -26,6 +26,7 @@ int i2c_scan(void) {
     reqMaster.restart = 0;
     reqMaster.callback = NULL;
     
+    int found = 0; // Flag to check if any device is found
     // Scan all possible addresses (0 to 127)
     for (uint8_t address = 0; address < 128; address++) {
         printf(".");
@@ -34,11 +35,17 @@ int i2c_scan(void) {
         reqMaster.addr = address;
         if ((MXC_I2C_MasterTransaction(&reqMaster)) == 0) {
             printf("\nFound slave ID %03d; 0x%02X\n", address, address);
+            found = 1; // Set flag to indicate a device is found
         }
-        MXC_Delay(MXC_DELAY_MSEC(200));             // Delay for 200 milliseconds
-        return 0;
+        MXC_Delay(MXC_DELAY_MSEC(200));             // Delay for 200 milliseconds 
+    }
+       if (found) {
+        return 0; // At least one device was found
+    } else {
+        return 1; // No devices found
     }
 }
+
 
 // Write data to a specific register of an I2C slave device
 int i2c_write_register(uint8_t address, uint8_t reg_address, uint8_t* data, uint8_t length) {
