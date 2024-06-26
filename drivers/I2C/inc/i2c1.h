@@ -62,11 +62,13 @@ extern "C" {
 /**
  * @brief      Initializes the I2C master interface
  *             Prints error message if initialization fails.
+ * @return     return 0, If function is successful.
 */
 int i2c_init(void);
 /**
  * @brief      Scan for I2C slave devices on the bus.
  *             Setup the I2C frequency.
+ * @return     return 0, If function is successful.
 */
 int i2c_scan(void);
 /**
