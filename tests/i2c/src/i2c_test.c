@@ -47,15 +47,26 @@ int test_i2c_scan(void)
 
 }
 /******************************************************************************/
-int test_i2c_write(void)
-{
-    uint8_t reg_addr = 0x40; 
-    uint8_t data = 0xFF; // Declare and initialize the data variable
-    if(i2c_write_register(device, reg_addr, &data, 1) == 0){
-        return 0;
+int test_i2c_write(void) {
+    uint8_t reg_addr = 0x40;
+    uint8_t write_data = 0xFF;
+    uint8_t read_data = 0;
+
+    // Write data to the register
+    if (i2c_write_register(device, reg_addr, &write_data, 1) != 0) {
+        return 1; // Write failed
     }
-    else{
-        return 1;
+
+    // Read back data from the same register
+    if (i2c_read_register(device, reg_addr, &read_data, 1) != 0) {
+        return 1; // Read failed
+    }
+
+    // Compare the written and read data
+    if (read_data == write_data) {
+        return 0; // Test passed
+    } else {
+        return 1; // Test failed
     }
 }
 /******************************************************************************/
