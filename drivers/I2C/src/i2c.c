@@ -1,12 +1,13 @@
  #include "i2c1.h"             // Include the I2C driver header file
  
 // Initialize the I2C master interface
-void i2c_init(void) {
+int i2c_init(void) {
     int error = MXC_I2C_Init(I2C_MASTER, 1, 0);    // Initialize I2C with the defined master interface
     if (error != E_NO_ERROR) {
         printf("-->I2C Master Initialization failed, error:%d\n", error); // Print error message if initialization fails
     } else {
         printf("\n-->I2C Master Initialization Complete\n");
+        return 0;
     }
 }
 
@@ -33,7 +34,8 @@ int i2c_scan(void) {
         if ((MXC_I2C_MasterTransaction(&reqMaster)) == 0) {
             printf("\nFound slave ID %03d; 0x%02X\n", address, address);
         }
-        MXC_Delay(MXC_DELAY_MSEC(200));             // Delay for 200 milliseconds  
+        MXC_Delay(MXC_DELAY_MSEC(200));             // Delay for 200 milliseconds
+        return 0;
     }
 }
 
