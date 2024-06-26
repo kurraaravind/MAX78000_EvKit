@@ -5,6 +5,7 @@ int i2c_init(void) {
     int error = MXC_I2C_Init(I2C_MASTER, 1, 0);    // Initialize I2C with the defined master interface
     if (error != E_NO_ERROR) {
         printf("-->I2C Master Initialization failed, error:%d\n", error); // Print error message if initialization fails
+        return 1;
     } else {
         printf("\n-->I2C Master Initialization Complete\n");
         return 0;
