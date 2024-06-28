@@ -139,6 +139,25 @@ int test_i2c_Gyro_mode(void){
 
 }
 /******************************************************************************/
+int test_bmi160_soft_reset(void) {
+    // Perform soft reset
+    int result = bmi160_softi_reset();
+    if (result != E_NO_ERROR) {
+        printf("Soft reset failed, test aborted.\n");
+        return result;
+    }
+
+    // Check soft reset verification
+    result = check_bmi160_reset();
+    if (result == E_NO_ERROR) {
+        printf("BMI160 soft reset test passed.\n");
+    } else {
+        printf("BMI160 soft reset test failed.\n");
+    }
+
+    return result;
+}
+/******************************************************************************/
 void test_i2c(void)
 {
 	int a = test_i2c_init();
@@ -147,7 +166,8 @@ void test_i2c(void)
 	int d = test_i2c_read();
 	int e = test_i2c_Accelerometer_normal_mode();
 	int f = test_i2c_Gyro_mode();
-	if(a == 0 && b == 0 && c == 0 && d == 0 && e == 0 && f == 0)
+	 int g = test_bmi160_soft_reset();
+	if(a == 0 && b == 0 && c == 0 && d == 0 && e == 0 && f == 0 && g == 0)
 	{
 		printf("All Test cases of I2C PASSED!\n");
 	}
