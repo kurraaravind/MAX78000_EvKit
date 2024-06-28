@@ -58,42 +58,38 @@ extern "C" {
 #endif
 
 #define I2C_FREQ 100000       // I2C frequency set to 100kHz
-#define device    0x69
-
 
 /***** Function Prototypes *****/
 /**
- * @brief      Initializes the I2C master interface
- *             Prints error message if initialization fails.
+* @brief      Tests the initialization of the I2C devices.
+* @return     Returns 0 if the operation is successful, otherwise returns 1.
 */
-int i2c_init(void);
-/**
- * @brief      Scan for I2C slave devices on the bus.
- *             Setup the I2C frequency.
-*/
-int i2c_scan(void);
-/**
- * @brief      Writes data to a specific register of an I2C slave device.
- * @param      address	     Address of the slave device.
- * @param      reg_adress    Address of the register to which writing to be done.
- * @param      data	     Pointer to the address of the data to be written in the Register address.
- * @param      length	     Length of the data to be written.
- * @return     return 0, If function is successful.
-*/
-int i2c_write_register(uint8_t address, uint8_t reg_address, uint8_t* data, uint8_t length);
+int test_i2c_init(void);
 /*
- * @brief      Reads data from the specific register of an I2C slave device.
- * @param      address	     Address of the slave device.
- * @param      reg_adress    Address of the register from which reading to be done.
- * @param      buffer	     Pointer to the address of the buffer where reading is to be done.
- * @param      length	     Length of the buffer.
- * @return     return 0, If function is successful.
+* @brief     Tests the Scanning of  the I2C devices present.
+* @return    Returns 0 if the operation is successful, otherwise returns 1.
 */
-int i2c_read_register(uint8_t address, uint8_t reg_adress, uint8_t* buffer, uint8_t length);
+int test_i2c_scan(void);
+/*
+* @brief     Tests the writing to a register functionality.
+* @return    Returns 0 if the operation is successful, otherwise returns 1.
+*/
+int test_i2c_write(void);
+/*
+* @brief     Tests the Reading from a register functionality.
+* @return    Returns 0 if the operation is successful, otherwise returns 1.
+*/
+int test_i2c_read(void);
+/*
+* @brief     Tests the Setting of Accelerometer to Normal mode.
+* @return    Returns 0 if the operation is successful, otherwise returns 1.
+*/
+int test_i2c_Accelerometer_normal_mode(void);
 /**
  * @brief      Main function to test I2C functionality.
  */
 void test_i2c(void);
+
 #ifdef __cplusplus
 }
 #endif
