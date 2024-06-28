@@ -57,6 +57,8 @@ extern "C" {
 #endif
 
 #define I2C_FREQ 100000       // I2C frequency set to 100kHz
+#define BMI160_CMD_REG 0x7E   //command register for BMI160
+
 
 /***** Function Prototypes *****/
 /**
