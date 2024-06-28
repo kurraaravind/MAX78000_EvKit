@@ -165,3 +165,46 @@ int check__gyroscope_power_mode(struct bmi160_dev *dev, uint8_t *status)
     // Return the result of the I2C read operation
     return result;
 }
+//Soft Reset of CMD_REG
+int bmi160_softi_reset(void)
+{
+    // BMI160 soft reset command
+    uint8_t cmd = 0xB6; // Soft reset command for BMI160
+    printf("Writing to address 0x%02X, register 0x%02X, data: 0x%02X\n", BMI160_I2C_ADDR, BMI160_CMD_REG, cmd);
+
+    int result = i2c_write_register(BMI160_I2C_ADDR, BMI160_CMD_REG, &cmd, 1);
+    if (result != E_NO_ERROR)
+    {
+        printf("Failed to perform soft reset, error: %d\n", result);
+        return result;
+    }
+
+    // Delay to allow the reset to complete
+    MXC_Delay(MXC_DELAY_MSEC(100));
+
+    printf("Soft reset performed successfully.\n");
+    return E_NO_ERROR;
+}
+//Checks whether register Reset or Not
+int check_bmi160_reset(void)
+{
+    uint8_t reg_value;
+    int result = i2c_read_register(BMI160_I2C_ADDR, BMI160_CMD_REG, &reg_value, 1);
+    if (result != E_NO_ERROR)
+    {
+        printf("Failed to read PMU_STATUS register, error: %d\n", result);
+        return result;
+    }
+
+    // Compare with the default value expected after a soft reset
+    if (reg_value == 0x00)
+    { 
+        printf("Soft reset verified: CMD_Register = 0x%02X\n", reg_value);
+        return E_NO_ERROR;
+    }
+    else
+    {
+        printf("Soft reset failed or not verified: INT_MAP = 0x%02X\n", reg_value);
+        return -1;
+    }
+}
