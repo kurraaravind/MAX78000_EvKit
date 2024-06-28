@@ -89,6 +89,31 @@ int i2c_write_register(uint8_t address, uint8_t reg_adress, uint8_t* data, uint8
  * @return     return 0, If function is successful.
 */
 int i2c_read_register(uint8_t address, uint8_t reg_adress, uint8_t* buffer, uint8_t length);
+/**
+ * @brief      Structure to hold BMI160 device information.
+ *
+ * This structure holds the necessary information for communicating with the BMI160
+ * device over I2C. It includes the I2C address of the device, register addresses
+ * for various functionalities, and a delay function pointer.
+ */
+struct bmi160_dev {
+    uint8_t chip_id;                   // I2C address of the BMI160 device
+    uint8_t gyro_self_test_enable_reg; // Register address to enable gyro self-test
+    uint8_t gyro_self_test_status_reg; // Register address for gyro self-test status
+    void (*delay_ms)(uint32_t);        // Pointer to delay function (optional)
+};
+/**
+ * @brief      Sets the accelerometer to normal mode.
+ *
+ * This function sends the appropriate command to the BMI160 device to set the
+ * accelerometer into normal operating mode.
+ *
+ * @param[in]  dev   Pointer to the device structure containing device information.
+ *
+ * @return     Returns 0 if the function is successful, non-zero error code otherwise.
+ */
+int set_accelerometer_normal_mode(struct bmi160_dev *dev);
+
 #ifdef __cplusplus
 }
 #endif
