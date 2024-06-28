@@ -85,6 +85,11 @@ int test_i2c_read(void);
 * @return    Returns 0 if the operation is successful, otherwise returns 1.
 */
 int test_i2c_Accelerometer_normal_mode(void);
+/*
+* @brief     Tests the Setting of Gyroscope to Normal mode.
+* @return    Returns 0 if the operation is successful, otherwise returns 1.
+*/
+int test_i2c_Gyro_mode(void);
 /**
  * @brief      Main function to test I2C functionality.
  */
