@@ -59,6 +59,7 @@ extern "C" {
 #define I2C_FREQ 100000       // I2C frequency set to 100kHz
 #define BMI160_CMD_REG 0x7E   //command register for BMI160
 #define BMI160_PMU_STATUS_REG 0x03  // PMU status register for BMI160
+#define BMI160_I2C_ADDR 0x69       //Device Address
 
 
 /***** Function Prototypes *****/
@@ -151,6 +152,24 @@ int set_gyroscope_Normal_mode(struct bmi160_dev *dev);
  * @return     Returns 0 if the function successfully reads the status, non-zero error code otherwise.
  */
 int check__gyroscope_power_mode(struct bmi160_dev *dev, uint8_t *status);
+/**
+ * @brief      Performs a software reset on the BMI160 sensor.
+ *
+ * This function sends the soft reset command to the BMI160 device and waits
+ * for the reset to complete.
+ *
+ * @return     Returns 0 if the reset is successful, non-zero error code otherwise.
+ */
+int bmi160_softi_reset(void);
+/**
+ * @brief      Checks if the BMI160 sensor has been reset successfully.
+ *
+ * This function reads a register (e.g., INT_MAP register) after performing a soft reset
+ * to verify if the reset was successful.
+ *
+ * @return     Returns 0 if the reset was verified successfully, -1 if verification failed.
+ */
+int check_bmi160_reset(void);
 #ifdef __cplusplus
 }
 #endif
