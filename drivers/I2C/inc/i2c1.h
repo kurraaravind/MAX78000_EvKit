@@ -115,6 +115,18 @@ struct bmi160_dev {
  * @return     Returns 0 if the function is successful, non-zero error code otherwise.
  */
 int set_accelerometer_normal_mode(struct bmi160_dev *dev);
+/**
+ * @brief      Checks the power mode status of the BMI160 accelerometer.
+ *
+ * This function reads the PMU status register of the BMI160 accelerometer to determine
+ * its current power mode.
+ *
+ * @param[in]  dev    Pointer to the device structure containing device information.
+ * @param[out] status Pointer to a variable where the power mode status will be stored.
+ *
+ * @return     Returns 0 if the function successfully reads the status, non-zero error code otherwise.
+ */
+int check_accelerometer_power_mode(struct bmi160_dev *dev, uint8_t *status);
 
 #ifdef __cplusplus
 }
