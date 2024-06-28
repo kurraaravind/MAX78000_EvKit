@@ -51,6 +51,7 @@ int test_i2c_write(void) {
     uint8_t reg_addr = 0x40;
     uint8_t write_data = 0xFF;
     uint8_t read_data = 0;
+    uint8_t  device = 0x69;
 
     // Write data to the register
     if (i2c_write_register(device, reg_addr, &write_data, 1) != 0) {
@@ -74,6 +75,7 @@ int test_i2c_read(void) {
     uint8_t read_buff;
     uint8_t reg_addr = 0x00;
     uint8_t expected_value = 0xD1;
+    uint8_t  device = 0x69;
 
     int result = i2c_read_register(device, reg_addr, &read_buff, 1);
     if (result == E_NO_ERROR) {
