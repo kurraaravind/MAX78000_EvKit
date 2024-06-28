@@ -91,13 +91,26 @@ int test_i2c_read(void) {
     }
 }
 /******************************************************************************/
+int test_i2c_Accelerometer_normal_mode(void){
+    struct bmi160_dev dev;
+    dev.chip_id = 0x69; //  I2C address of the BMI160 device
+    dev.delay_ms = NULL; // Delay function
+	if(set_accelerometer_normal_mode(&dev) == 0){
+		return 0;
+	}
+	else{
+		return 1;
+	}
+}
+/******************************************************************************/
 void test_i2c(void)
 {
 	int a = test_i2c_init();
 	int b = test_i2c_scan();
 	int c = test_i2c_write();
 	int d = test_i2c_read();
-	if(a == 0 && b == 0 && c == 0 && d == 0)
+	int e = test_i2c_Accelerometer_normal_mode();
+	if(a == 0 && b == 0 && c == 0 && d == 0 && e == 0)
 	{
 		printf("All Test cases of I2C PASSED!\n");
 	}
