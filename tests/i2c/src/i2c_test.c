@@ -95,14 +95,25 @@ int test_i2c_read(void) {
 /******************************************************************************/
 int test_i2c_Accelerometer_normal_mode(void){
     struct bmi160_dev dev;
-    dev.chip_id = 0x69; //  I2C address of the BMI160 device
+    dev.chip_id = 0x69; // I2C address of the BMI160 device
     dev.delay_ms = NULL; // Delay function
-	if(set_accelerometer_normal_mode(&dev) == 0){
-		return 0;
-	}
-	else{
-		return 1;
-	}
+
+    if (set_accelerometer_normal_mode(&dev) != 0) {
+        return 1;
+    }
+
+    uint8_t status;
+    if (check_accelerometer_power_mode(&dev, &status) != 0) {
+        return 1;
+    }
+
+    // Check if the accelerometer is in normal mode 
+    if ((status & 0x30) == 0x10) {
+        return 0;
+    } else {
+        return 1;
+    }
+
 }
 /******************************************************************************/
 void test_i2c(void)
