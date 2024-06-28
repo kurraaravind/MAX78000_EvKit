@@ -58,6 +58,7 @@ extern "C" {
 
 #define I2C_FREQ 100000       // I2C frequency set to 100kHz
 #define BMI160_CMD_REG 0x7E   //command register for BMI160
+#define BMI160_PMU_STATUS_REG 0x03  // PMU status register for BMI160
 
 
 /***** Function Prototypes *****/
@@ -127,7 +128,29 @@ int set_accelerometer_normal_mode(struct bmi160_dev *dev);
  * @return     Returns 0 if the function successfully reads the status, non-zero error code otherwise.
  */
 int check_accelerometer_power_mode(struct bmi160_dev *dev, uint8_t *status);
-
+/**
+ * @brief      Sets the gyroscope to suspend mode.
+ *
+ * This function sends the appropriate command to the BMI160 device to set the
+ * gyroscope into suspend mode.
+ *
+ * @param[in]  dev   Pointer to the device structure containing device information.
+ *
+ * @return     Returns 0 if the function is successful, non-zero error code otherwise.
+ */
+int set_gyroscope_Normal_mode(struct bmi160_dev *dev);
+/**
+ * @brief      Checks the power mode status of the BMI160 gyroscope.
+ *
+ * This function reads the PMU status register of the BMI160 gyroscope to determine
+ * its current power mode.
+ *
+ * @param[in]  dev    Pointer to the device structure containing device information.
+ * @param[out] status Pointer to a variable where the power mode status will be stored.
+ *
+ * @return     Returns 0 if the function successfully reads the status, non-zero error code otherwise.
+ */
+int check__gyroscope_power_mode(struct bmi160_dev *dev, uint8_t *status);
 #ifdef __cplusplus
 }
 #endif
