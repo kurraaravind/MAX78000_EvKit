@@ -107,7 +107,7 @@ int test_i2c_Accelerometer_normal_mode(void){
         return 1;
     }
 
-    // Check if the accelerometer is in normal mode 
+    // Check if the accelerometer is in normal mode or Low power mode
     if ((status & 0x30) == 0x10) {
         return 0;
     } else {
