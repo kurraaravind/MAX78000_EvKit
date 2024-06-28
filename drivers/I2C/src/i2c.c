@@ -124,3 +124,9 @@ int i2c_read_register(uint8_t address, uint8_t reg_address, uint8_t* buffer, uin
 
     return ret;
 }
+//Setting the accelerometer to Normal mode
+int set_accelerometer_normal_mode(struct bmi160_dev *dev)
+{
+    uint8_t cmd = 0x11; // Command to set accelerometer to normal mode
+    return i2c_write_register(dev->chip_id, BMI160_CMD_REG, &cmd, 1);
+}
