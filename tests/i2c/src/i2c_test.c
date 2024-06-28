@@ -116,6 +116,29 @@ int test_i2c_Accelerometer_normal_mode(void){
 
 }
 /******************************************************************************/
+int test_i2c_Gyro_mode(void){
+    struct bmi160_dev dev;
+    dev.chip_id = 0x69; // I2C address of the BMI160 device
+    dev.delay_ms = NULL; // Delay function
+
+    if (set_gyroscope_Normal_mode(&dev) != 0) {
+        return 1;
+    }
+
+    uint8_t status_1;
+    if (check__gyroscope_power_mode(&dev, &status_1) != 0) {
+        return 1;
+    }
+    
+    // Check if the accelerometer is in normal mode 
+    if ((status_1 & 0x34) == 0x14) {
+        return 0;
+    } else {
+        return 1;
+    }
+
+}
+/******************************************************************************/
 void test_i2c(void)
 {
 	int a = test_i2c_init();
@@ -123,7 +146,8 @@ void test_i2c(void)
 	int c = test_i2c_write();
 	int d = test_i2c_read();
 	int e = test_i2c_Accelerometer_normal_mode();
-	if(a == 0 && b == 0 && c == 0 && d == 0 && e == 0)
+	int f = test_i2c_Gyro_mode();
+	if(a == 0 && b == 0 && c == 0 && d == 0 && e == 0 && f == 0)
 	{
 		printf("All Test cases of I2C PASSED!\n");
 	}
