@@ -130,3 +130,13 @@ int set_accelerometer_normal_mode(struct bmi160_dev *dev)
     uint8_t cmd = 0x11; // Command to set accelerometer to normal mode
     return i2c_write_register(dev->chip_id, BMI160_CMD_REG, &cmd, 1);
 }
+// CHecking the Power mode
+int check_accelerometer_power_mode(struct bmi160_dev *dev, uint8_t *status)
+{
+    // Perform an I2C read operation to read the PMU status register
+    // The result will be stored in the 'status' variable
+    int result = i2c_read_register(dev->chip_id, BMI160_PMU_STATUS_REG, status, 1);
+    
+    // Return the result of the I2C read operation
+    return result;
+}
