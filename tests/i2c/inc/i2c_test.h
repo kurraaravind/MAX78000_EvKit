@@ -90,6 +90,11 @@ int test_i2c_Accelerometer_normal_mode(void);
 * @return    Returns 0 if the operation is successful, otherwise returns 1.
 */
 int test_i2c_Gyro_mode(void);
+/*
+* @brief     Tests the Soft Reset of BMI160.
+* @return    Returns 0 if the operation is successful, otherwise returns 1.
+*/
+int test_bmi160_soft_reset(void);
 /**
  * @brief      Main function to test I2C functionality.
  */
